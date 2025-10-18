@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Geometry Learn!</title>
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: rgb(255, 219, 187);
   margin: 0;
@@ -12,12 +16,13 @@ body {
   font-family: Arial, sans-serif;
   color: rgb(51, 34, 17);
 }
+
 h2, p {
   margin: 10px;
   padding: 10px;
   text-align: center;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-  font-size: 24px;
+  font-size: clamp(18px, 4vw, 24px);
   line-height: 1.6;
   letter-spacing: 0.5px;
   word-spacing: 1px;
@@ -31,6 +36,7 @@ h2, p {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -43,11 +49,21 @@ ul {
   border-bottom: 2px solid black;
   border-top: 2px solid black;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
+
 ul li {
-  float: left;
   border-right: 1px solid #bbb;
+  flex: 1 1 auto;
+  min-width: 80px;
 }
+
+ul li:last-child {
+  border-right: none;
+}
+
 ul li a {
   display: block;
   color: white;
@@ -55,79 +71,119 @@ ul li a {
   padding: 14px 16px;
   text-decoration: none;
   font-family: Arial, sans-serif;
-  font-size: 18px;
+  font-size: clamp(14px, 3vw, 18px);
   transition: background-color 0.3s, color 0.3s;
   border-radius: 4px;
   margin: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 ul li a:hover {
   background-color: rgb(153, 126, 103);
   color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transform: translateY(-2px);
 }
+
 html {
   scroll-behavior: smooth;
 }
+
 #home {
   padding: 20px;
   background-color: rgb(248, 242, 236);
   text-align: center;
-  height: 1200px;
+  min-height: 100vh;
 }
+
 #learn {
   padding: 20px;
-  min-height: 1000px;
+  min-height: 100vh;
   background-color: rgb(221, 194, 173);
 }
+
 #quiz {
   padding: 20px;
-  min-height: 1000px;
+  min-height: 100vh;
   background-color: rgb(153, 126, 103);
 }
+
 .shape-link {
   display: inline-block;
   margin: 10px;
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   border-radius: 8px;
+  max-width: 100%;
 }
+
 .shape-link:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
+
 .shape-link img {
   border: none;
   vertical-align: middle;
-  max-width: 100%;
+  width: 100%;
   height: auto;
+  max-width: 200px;
+  border-radius: 8px;
 }
+
 .shape-details {
   padding: 20px;
-  margin-top: 40px;
+  margin: 20px auto;
   border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.7);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
 }
+
+.shape-details h3 {
+  font-size: clamp(20px, 4vw, 28px);
+  margin: 0 0 10px 0;
+}
+
+.shape-details p {
+  background: none;
+  box-shadow: none;
+  border: none;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+}
+
 .quiz-form {
   max-width: 500px;
   margin: 40px auto;
-  padding: 30px;
+  padding: 20px;
   background-color: #fffaf3;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  font-size: 18px;
+  font-size: clamp(14px, 3vw, 18px);
   line-height: 1.6;
   color: rgb(51, 34, 17);
+  width: 90%;
 }
+
 .quiz-form label {
   display: block;
   font-weight: bold;
-  margin-top: 15px;
+  margin-top: 20px;
+  font-size: clamp(15px, 3.5vw, 18px);
 }
+
 .quiz-form input[type="radio"] {
   margin-right: 8px;
+  margin-top: 8px;
+  transform: scale(1.2);
 }
+
+.quiz-form > input[type="radio"] {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .quiz-form button {
   display: block;
   width: 100%;
@@ -135,50 +191,117 @@ html {
   background-color: rgb(102, 73, 48);
   color: white;
   border: none;
-  padding: 12px;
+  padding: 14px;
   border-radius: 8px;
-  font-size: 18px;
+  font-size: clamp(16px, 3.5vw, 18px);
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  touch-action: manipulation;
 }
+
 .quiz-form button:hover {
   background-color: rgb(153, 126, 103);
   transform: translateY(-2px);
 }
+
+.quiz-form button:active {
+  transform: translateY(0);
+}
+
 .hint-button {
   display: inline-block;
   margin-top: 8px;
   background-color: rgb(204, 174, 143);
   border: none;
-  padding: 5px 10px;
+  padding: 8px 12px;
   border-radius: 6px;
   cursor: pointer;
   color: rgb(51, 34, 17);
   font-weight: bold;
   transition: background-color 0.3s ease;
+  font-size: clamp(14px, 3vw, 16px);
+  touch-action: manipulation;
 }
+
 .hint-button:hover {
   background-color: rgb(230, 200, 170);
 }
+
 .hint-image {
   display: none;
   margin-top: 10px;
   text-align: center;
 }
+
 .hint-image img {
-  max-width: 200px;
+  max-width: 150px;
+  width: 100%;
+  height: auto;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
+
 #quiz-result {
   text-align: center;
   font-weight: bold;
   background-color: rgba(255,255,255,0.8);
   margin: 20px auto;
-  max-width: 400px;
+  max-width: 90%;
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  font-size: clamp(14px, 3vw, 16px);
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  ul {
+    flex-direction: column;
+  }
+  
+  ul li {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #bbb;
+  }
+  
+  ul li:last-child {
+    border-bottom: none;
+  }
+  
+  .shape-link {
+    margin: 15px 5px;
+    width: calc(50% - 10px);
+    display: inline-block;
+  }
+  
+  .shape-link img {
+    max-width: 150px;
+  }
+  
+  h2, p {
+    margin: 10px 5px;
+  }
+  
+  .quiz-form {
+    padding: 15px;
+    margin: 20px auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .shape-link {
+    width: 100%;
+    margin: 10px auto;
+  }
+  
+  .shape-link img {
+    max-width: 180px;
+  }
+  
+  ul li a {
+    padding: 12px 10px;
+  }
 }
 </style>
 </head>
@@ -193,12 +316,12 @@ html {
 <div id="home">
   <h2>Geometry Learn!</h2>
   <p>Welcome to Geometry learn! Click on the shape you want to learn about.</p>
-  <a href="#learn-pyramid" class="shape-link"><img src="pyramid.svg" width="300" height="400" alt="Learn about pyramids"></a>
-  <a href="#learn-sphere" class="shape-link"><img src="sphere.png" width="300" height="400" alt="Learn about circles!"></a>
-  <a href="#learn-circle" class="shape-link"><img src="circle.png" width="300" height="400" alt="Learn about circles!"></a>
-  <a href="#learn-square" class="shape-link"><img src="square.svg" width="300" height="400" alt="Learn about squares"></a>
-  <a href="#learn-triangle" class="shape-link"><img src="triangle.svg" width="300" height="400" alt="Learn about triangles"></a>
-  <a href="#learn-cube" class="shape-link"><img src="cube.svg" width="300" height="400" alt="Learn about cubes"></a>
+  <a href="#learn-pyramid" class="shape-link"><img src="pyramid.svg" alt="Learn about pyramids"></a>
+  <a href="#learn-sphere" class="shape-link"><img src="sphere.png" alt="Learn about circles!"></a>
+  <a href="#learn-circle" class="shape-link"><img src="circle.png" alt="Learn about circles!"></a>
+  <a href="#learn-square" class="shape-link"><img src="square.svg" alt="Learn about squares"></a>
+  <a href="#learn-triangle" class="shape-link"><img src="triangle.svg" alt="Learn about triangles"></a>
+  <a href="#learn-cube" class="shape-link"><img src="cube.svg" alt="Learn about cubes"></a>
 </div>
 
 <div id="learn">
