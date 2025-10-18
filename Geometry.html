@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geometry Learn!</title>
+<style>
+body {
+  background-color: rgb(255, 219, 187);
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  color: rgb(51, 34, 17);
+}
+h2, p {
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  font-size: 24px;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+  word-spacing: 1px;
+  border-bottom: 2px solid rgb(102, 73, 48);
+  background-color: rgb(255, 239, 213);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 8px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgb(102, 73, 48);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid black;
+  border-top: 2px solid black;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+ul li {
+  float: left;
+  border-right: 1px solid #bbb;
+}
+ul li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 4px;
+  margin: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+ul li a:hover {
+  background-color: rgb(153, 126, 103);
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+html {
+  scroll-behavior: smooth;
+}
+#home {
+  padding: 20px;
+  background-color: rgb(248, 242, 236);
+  text-align: center;
+  height: 1200px;
+}
+#learn {
+  padding: 20px;
+  min-height: 1000px;
+  background-color: rgb(221, 194, 173);
+}
+#quiz {
+  padding: 20px;
+  min-height: 1000px;
+  background-color: rgb(153, 126, 103);
+}
+.shape-link {
+  display: inline-block;
+  margin: 10px;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border-radius: 8px;
+}
+.shape-link:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.shape-link img {
+  border: none;
+  vertical-align: middle;
+  max-width: 100%;
+  height: auto;
+}
+.shape-details {
+  padding: 20px;
+  margin-top: 40px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.quiz-form {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #fffaf3;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgb(51, 34, 17);
+}
+.quiz-form label {
+  display: block;
+  font-weight: bold;
+  margin-top: 15px;
+}
+.quiz-form input[type="radio"] {
+  margin-right: 8px;
+}
+.quiz-form button {
+  display: block;
+  width: 100%;
+  margin-top: 25px;
+  background-color: rgb(102, 73, 48);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.quiz-form button:hover {
+  background-color: rgb(153, 126, 103);
+  transform: translateY(-2px);
+}
+.hint-button {
+  display: inline-block;
+  margin-top: 8px;
+  background-color: rgb(204, 174, 143);
+  border: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: rgb(51, 34, 17);
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+.hint-button:hover {
+  background-color: rgb(230, 200, 170);
+}
+.hint-image {
+  display: none;
+  margin-top: 10px;
+  text-align: center;
+}
+.hint-image img {
+  max-width: 200px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+#quiz-result {
+  text-align: center;
+  font-weight: bold;
+  background-color: rgba(255,255,255,0.8);
+  margin: 20px auto;
+  max-width: 400px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+<body>
+
+<ul>
+  <li><a href="#home">Home</a></li>
+  <li><a href="#learn">Learn</a></li>
+  <li><a href="#quiz">Quiz</a></li>
+</ul>
+
+<div id="home">
+  <h2>Geometry Learn!</h2>
+  <p>Welcome to Geometry learn! Click on the shape you want to learn about.</p>
+  <a href="#learn-pyramid" class="shape-link"><img src="pyramid.svg" width="300" height="400" alt="Learn about pyramids"></a>
+  <a href="#learn-sphere" class="shape-link"><img src="sphere.png" width="300" height="400" alt="Learn about circles!"></a>
+  <a href="#learn-circle" class="shape-link"><img src="circle.png" width="300" height="400" alt="Learn about circles!"></a>
+  <a href="#learn-square" class="shape-link"><img src="square.svg" width="300" height="400" alt="Learn about squares"></a>
+  <a href="#learn-triangle" class="shape-link"><img src="triangle.svg" width="300" height="400" alt="Learn about triangles"></a>
+  <a href="#learn-cube" class="shape-link"><img src="cube.svg" width="300" height="400" alt="Learn about cubes"></a>
+</div>
+
+<div id="learn">
+  <h2>Learn Section</h2>
+  <p>Here you can learn about specific geometric shapes.</p>
+  <div id="learn-pyramid" class="shape-details"><h3>Pyramid</h3><p>A pyramid is 3d shape that is made up of 4 triangles and a base of a square. It has 5 sides/faces and 5 verticies.</p></div>
+  <div id="learn-sphere" class="shape-details"><h3>Sphere</h3><p>A sphere is a 3d shape that is perfectly round. It has no verticies or edges. It is like a circle but in 3d.</p></div>
+  <div id="learn-circle" class="shape-details"><h3>Circle</h3><p>A circle is a 2d shape that is perfectly round. It has no verticies or edges. It is like a sphere but in 2d.</p></div>
+  <div id="learn-square" class="shape-details"><h3>Square</h3><p>A square is 2d shape it has 4 verticies and all 90 degree right angles.</p></div>
+  <div id="learn-triangle" class="shape-details"><h3>Triangle</h3><p>A triangle is a shape with 3 verticies. It has all acute angles. It is a 2d shape.</p></div>
+  <div id="learn-cube" class="shape-details"><h3>Cube</h3><p>A cube is a 3d shape with 8 verticies. It is made up of 6 square shapes. The base is a square. It has 24 90 degree angles.</p></div>
+</div>
+
+<div id="quiz">
+  <h2>Quiz Section</h2>
+  <p>Test your knowledge with our quiz!</p>
+  <form id="quiz-form" class="quiz-form">
+    <label>How many 90° angles does a square have?</label>
+    <input type="radio" name="sqr90" value="3">3<br>
+    <input type="radio" name="sqr90" value="4">4<br>
+    <input type="radio" name="sqr90" value="5">5<br>
+    <button type="button" class="hint-button" data-img="square.svg">Hint</button>
+    <div class="hint-image"><img src="square.svg"></div>
+
+    <label>How many sides does a triangle have?</label>
+    <input type="radio" name="triside" value="2">2<br>
+    <input type="radio" name="triside" value="3">3<br>
+    <input type="radio" name="triside" value="4">4<br>
+    <button type="button" class="hint-button" data-img="triangle.svg">Hint</button>
+    <div class="hint-image"><img src="triangle.svg"></div>
+
+    <label>How many verticies does a circle have?</label>
+    <input type="radio" name="cirside" value="2">2<br>
+    <input type="radio" name="cirside" value="0">0<br>
+    <input type="radio" name="cirside" value="1">1<br>
+    <button type="button" class="hint-button" data-img="circle.png">Hint</button>
+    <div class="hint-image"><img src="circle.png"></div>
+
+    <label>How many squares are in a cube?</label>
+    <input type="radio" name="cubesqrs" value="2">2<br>
+    <input type="radio" name="cubesqrs" value="3">3<br>
+    <input type="radio" name="cubesqrs" value="6">6<br>
+    <button type="button" class="hint-button" data-img="cube.svg">Hint</button>
+    <div class="hint-image"><img src="cube.svg"></div>
+
+    <label>How many sides/faces does a pyramid have?</label>
+    <input type="radio" name="pyside" value="3">3<br>
+    <input type="radio" name="pyside" value="6">6<br>
+    <input type="radio" name="pyside" value="5">5<br>
+    <button type="button" class="hint-button" data-img="pyramid.svg">Hint</button>
+    <div class="hint-image"><img src="pyramid.svg"></div>
+
+    <label>How many 90 degree angles does a cube have?</label>
+    <input type="radio" name="90cube" value="3">3<br>
+    <input type="radio" name="90cube" value="24">24<br>
+    <input type="radio" name="90cube" value="5">5<br>
+    <button type="button" class="hint-button" data-img="cube.svg">Hint</button>
+    <div class="hint-image"><img src="cube.svg"></div>
+
+    <label>What here is true about a triangle?</label>
+    <input type="radio" name="truetri" value="All acute">All acute<br>
+    <input type="radio" name="truetri" value="3 verticies">3 verticies<br>
+    <input type="radio" name="truetri" value="all of above">all of above<br>
+    <button type="button" class="hint-button" data-img="triangle.svg">Hint</button>
+    <div class="hint-image"><img src="triangle.svg"></div>
+
+    <button type="submit">Submit</button>
+  </form>
+  <div id="quiz-result"></div>
+</div>
+
+<script>
+document.querySelectorAll(".hint-button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const imgDiv = btn.nextElementSibling;
+    imgDiv.style.display = imgDiv.style.display === "block" ? "none" : "block";
+  });
+});
+
+document.getElementById("quiz-form").addEventListener("submit", function(event) {
+  event.preventDefault();
+  const sqr90 = document.querySelector('input[name="sqr90"]:checked');
+  const triside = document.querySelector('input[name="triside"]:checked');
+  const cirside = document.querySelector('input[name="cirside"]:checked');
+  const cubesqrs = document.querySelector('input[name="cubesqrs"]:checked');
+  const pyside = document.querySelector('input[name="pyside"]:checked');
+  const cube90 = document.querySelector('input[name="90cube"]:checked');
+  const truetri = document.querySelector('input[name="truetri"]:checked');
+  let result = "";
+  if (sqr90 && sqr90.value === "4") result += "Question 1 is ✅ correct.<br>"; else result += "Question 1 is ❌ incorrect.<br>";
+  if (triside && triside.value === "3") result += "Question 2 is ✅ correct.<br>"; else result += "Question 2 is ❌ incorrect.<br>";
+  if (cirside && cirside.value === "0") result += "Question 3 is ✅ correct.<br>"; else result += "Question 3 is ❌ incorrect.<br>";
+  if (cubesqrs && cubesqrs.value === "6") result += "Question 4 is ✅ correct.<br>"; else result += "Question 4 is ❌ incorrect.<br>";
+  if (pyside && pyside.value === "5") result += "Question 5 is ✅ correct.<br>"; else result += "Question 5 is ❌ incorrect.<br>";
+  if (cube90 && cube90.value === "24") result += "Question 6 is ✅ correct.<br>"; else result += "Question 6 is ❌ incorrect.<br>";
+  if (truetri && truetri.value === "all of above") result += "Question 7 is ✅ correct.<br>"; else result += "Question 7 is ❌ incorrect.<br>";
+  document.getElementById("quiz-result").innerHTML = result;
+});
+</script>
+
+</body>
+</html>
